@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elias & Lorena - Bodas de Plata</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <section id="hero" class="hero">
+        <div class="hero-content-wrapper fade-in">
+            <div class="envelope-container">
+                <img src="img/sobre.png" alt="Sobre de Invitación" class="envelope-img">
+            </div>
+            <button id="btnOpen" class="btn-primary">Abrir invitación</button>
+        </div>
+    </section>
+
+    <main id="main-content" class="hidden">
+        
+        <section class="welcome scroll-reveal">
+            <div class="container">
+                <h2 class="section-subtitle">Nuestra Historia</h2>
+                <div class="triple-panel-container">
+                    <div class="panel panel-side">
+                        <img src="img/portada.png" alt="Elias & Lorena" class="panel-img">
+                    </div>
+                    <div class="panel panel-center">
+                        <img src="img/portada.png" alt="Elias & Lorena" class="panel-img">
+                        <span class="name-overlay name-left">Elias</span>
+                        <span class="name-overlay name-right">Lorena</span>
+                    </div>
+                    <div class="panel panel-side">
+                        <img src="img/portada.png" alt="Elias & Lorena" class="panel-img">
+                    </div>
+                </div>
+                <h1 class="couple-names">Elias & Lorena</h1>
+                <p class="romantic-text">"25 años después, nuestro mejor lugar sigue siendo juntos."</p>
+                <div class="divider"></div>
+            </div>
+        </section>
+
+        <section class="details scroll-reveal">
+            <div class="container grid">
+                <div class="detail-card">
+                    <span class="icon">📅</span>
+                    <h3>CUÁNDO</h3>
+                    <p>Domingo, 16 de Agosto 2026</p>
+                    <p>14:00 Horas</p>
+                </div>
+                <div class="detail-card">
+                    <span class="icon">📍</span>
+                    <h3>DÓNDE</h3>
+                    <p>Salón Municipal</p>
+                    <p>Santa Catarina Pinula</p>
+                    <a href="https://maps.app.goo.gl/3bBJMpqYJuadRdJu5" target="_blank" class="btn-maps">VER UBICACIÓN</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="countdown-section scroll-reveal">
+            <div class="container">
+                <h3 class="section-subtitle">Faltan para el gran día:</h3>
+                <div id="countdown" class="countdown-container">
+                    <div class="time-box"><span id="days">00</span><small>Días</small></div>
+                    <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+                    <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+                    <div class="time-box"><span id="seconds">00</span><small>Seg</small></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp scroll-reveal">
+            <div class="container">
+                <div class="rsvp-box">
+                    <h3 class="section-subtitle">Confirmar Asistencia</h3>
+                    <form id="rsvpForm" class="rsvp-form">
+                        <input type="text" placeholder="Nombre completo" required>
+                        <div class="radio-group">
+                            <label><input type="radio" name="attending" value="si" required> Asistiré</label>
+                            <label><input type="radio" name="attending" value="no"> No asistiré</label>
+                        </div>
+                        <textarea placeholder="Mensaje para nosotros (Opcional)"></textarea>
+                        <button type="submit" class="btn-primary">Enviar Confirmación</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="divider"></div>
+            <p>Gracias por ser parte de nuestra historia</p>
+            <span class="silver-text">E & L</span>
+        </footer>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
