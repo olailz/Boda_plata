@@ -1,45 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const btnOpen = document.getElementById('btnOpen');
     const hero = document.getElementById('hero');
     const mainContent = document.getElementById('main-content');
 
-    // Apertura suave
-    btnOpen.addEventListener('click', () => {
-        hero.classList.add('hide');
-        mainContent.classList.remove('hidden');
-        setTimeout(() => {
+    // Apertura de invitación
+    if (btnOpen) {
+        btnOpen.addEventListener('click', () => {
+            hero.style.display = 'none';
+            mainContent.classList.remove('hidden');
             window.scrollTo(0, 0);
             revealOnScroll();
-        }, 150);
-    });
+        });
+    }
 
-  // Contador - Fecha actualizada: Domingo 16 de Agosto 2026, 14:00 Horas
+    // Contador
     const targetDate = new Date("Aug 16, 2026 14:00:00").getTime();
-
-    setInterval(() => {
+    const updateCountdown = () => {
         const now = new Date().getTime();
         const diff = targetDate - now;
-
-        // Si la fecha ya pasó, detenemos el contador
         if (diff <= 0) {
-            document.getElementById("countdown").innerHTML = "¡Es hoy!";
+            document.getElementById("countdown").innerHTML = "<h3>¡Es hoy!</h3>";
             return;
         }
-
-        // Cálculos de tiempo
         document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
         document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
         document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
         document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-    }, 1000);
+    };
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-    // Revelar al hacer scroll
-    const revealOnScroll = () => {
+    // ENVÍO DE DATOS
+    const rsvpForm = document.getElementById('rsvpForm');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzZXJCbuEg8lJnkTf4dtS_Tfn9Z2lFjbXdV-dz_JHmF9P2Kwfc-W9rYlebkkHPp0pxw/exec'; 
+
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btnSubmit = document.getElementById('submitBtn');
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Enviando...";
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(rsvpForm),
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                alert("¡Felicidades! Su confirmación ha sido enviada exitosamente.");
+                rsvpForm.reset();
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "Enviar Confirmación";
+            })
+            .catch(error => {
+                console.error('Error!', error);
+                alert("Hubo un error al enviar. Por favor intente de nuevo.");
+                btnSubmit.disabled = false;
+            });
+        });
+    }
+
+    // Animación Scroll
+    function revealOnScroll() {
         const elements = document.querySelectorAll('.scroll-reveal');
         elements.forEach(el => {
             const pos = el.getBoundingClientRect().top;
             if (pos < window.innerHeight - 100) el.classList.add('active');
         });
-    };
+    }
     window.addEventListener('scroll', revealOnScroll);
 });
