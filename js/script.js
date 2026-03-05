@@ -1,28 +1,76 @@
+let player;
+let isPlaying = false;
+
+// 1. CARGAR REPRODUCTOR DE YOUTUBE (API)
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: '1j67RTRKNe4', 
+        playerVars: {
+            'autoplay': 0,
+            'loop': 1,
+            'playlist': '1j67RTRKNe4' 
+        },
+        events: {
+            'onReady': () => { console.log("Música lista para sonar."); }
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    
     const btnOpen = document.getElementById('btnOpen');
     const hero = document.getElementById('hero');
     const mainContent = document.getElementById('main-content');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
 
-    // 1. APERTURA DE INVITACIÓN
+    // 2. APERTURA DE INVITACIÓN + PLAY MÚSICA
     if (btnOpen) {
         btnOpen.addEventListener('click', () => {
             hero.classList.add('hide'); 
             mainContent.classList.remove('hidden');
             
-            // Un pequeño delay para que la transición del sobre termine antes de mostrar lo demás
+            if (musicBtn) musicBtn.classList.remove('hidden');
+            
+            // Iniciar música
+            if (player && player.playVideo) {
+                player.playVideo();
+                isPlaying = true;
+                if (musicBtn) musicBtn.classList.add('playing');
+            }
+
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'instant' });
-                revealOnScroll(); // Disparamos la entrada de la primera sección
+                revealOnScroll(); 
             }, 800);
         });
     }
 
-    // 2. CONTADOR DE TIEMPO (Tu lógica original intacta)
+    // 3. CONTROL MANUAL DE MÚSICA
+    if (musicBtn) {
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                player.pauseVideo();
+                musicIcon.className = "fa-solid fa-play";
+                musicBtn.classList.remove('playing');
+            } else {
+                player.playVideo();
+                musicIcon.className = "fa-solid fa-music";
+                musicBtn.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+
+    // 4. CONTADOR DE TIEMPO
     const targetDate = new Date("Aug 16, 2026 14:00:00").getTime();
     const updateCountdown = () => {
         const now = new Date().getTime();
         const diff = targetDate - now;
+
+        const daysEl = document.getElementById("days");
+        if (!daysEl) return; 
 
         if (diff <= 0) {
             const countContainer = document.getElementById("countdown");
@@ -30,66 +78,68 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-        if(document.getElementById("days")) {
-            document.getElementById("days").innerText = d.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
-        }
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
     };
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 3. ENVÍO DE DATOS A GOOGLE SHEETS (Tu lógica original intacta)
+    // 5. ENVÍO DE DATOS A GOOGLE SHEETS (CORRECCIÓN CLAVE)
     const rsvpForm = document.getElementById('rsvpForm');
+    // Asegúrate de que esta URL sea la de tu "Última Implementación"
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzZXJCbuEg8lJnkTf4dtS_Tfn9Z2lFjbXdV-dz_JHmF9P2Kwfc-W9rYlebkkHPp0pxw/exec'; 
 
     if (rsvpForm) {
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const btnSubmit = document.getElementById('submitBtn');
+            
+            const btnSubmit = rsvpForm.querySelector('.btn-send');
+            const originalText = btnSubmit.innerText;
+
             btnSubmit.disabled = true;
             btnSubmit.innerText = "Enviando...";
 
+            // Extraemos los datos del formulario
+            const formData = new FormData(rsvpForm);
+            
+            // Creamos los parámetros para que coincidan EXACTAMENTE con tu Apps Script
+            const params = new URLSearchParams();
+            params.append('name', formData.get('name'));
+            params.append('message', formData.get('message'));
+            // Mapeamos 'attendance' (HTML) a 'attending' (Apps Script)
+            params.append('attending', formData.get('attendance')); 
+
             fetch(scriptURL, { 
                 method: 'POST', 
-                body: new FormData(rsvpForm),
+                body: params, // Enviamos como URLSearchParams para evitar problemas de CORS
                 mode: 'no-cors' 
             })
             .then(() => {
                 alert("¡Felicidades! Su confirmación ha sido enviada exitosamente.");
                 rsvpForm.reset();
                 btnSubmit.disabled = false;
-                btnSubmit.innerText = "Enviar Confirmación";
+                btnSubmit.innerText = originalText;
             })
             .catch(error => {
                 console.error('Error!', error);
                 alert("Hubo un error al enviar. Por favor intente de nuevo.");
                 btnSubmit.disabled = false;
-                btnSubmit.innerText = "Enviar Confirmación";
+                btnSubmit.innerText = originalText;
             });
         });
     }
 
-    // 4. ANIMACIÓN MEJORADA AL HACER SCROLL
+    // 6. ANIMACIÓN DE REVELACIÓN (SCROLL)
     function revealOnScroll() {
         const elements = document.querySelectorAll('.scroll-reveal');
-        
         elements.forEach((el) => {
             const rect = el.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            // Se activa cuando el elemento entra un 15% en la pantalla
-            if (rect.top <= windowHeight * 0.85) {
+            if (rect.top <= window.innerHeight * 0.85) {
                 el.classList.add('active');
             }
         });
     }
-
     window.addEventListener('scroll', revealOnScroll);
 });

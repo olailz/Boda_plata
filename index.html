@@ -10,6 +10,14 @@
 </head>
 <body>
 
+    <div id="musicBtn" class="music-control hidden">
+        <i id="musicIcon" class="fa-solid fa-music"></i>
+    </div>
+
+    <div style="position: absolute; top: -1000px; left: -1000px;">
+        <div id="youtube-player"></div>
+    </div>
+
     <section id="hero" class="hero">
         <div class="hero-content-wrapper">
             <div class="envelope-container">
@@ -23,17 +31,13 @@
         
         <section class="container scroll-reveal">
             <h2 class="section-subtitle">25 ANIVERSARIO</h2>
-            
             <div class="triple-panel-container">
                 <div class="panel panel-side"><img src="img/Lat.png" class="panel-img"></div>
-                <div class="panel panel-center">
-                    <img src="img/newf.png" class="panel-img">
-                </div>
+                <div class="panel panel-center"><img src="img/newf.png" class="panel-img"></div>
                 <div class="panel panel-side"><img src="img/portada.png" class="panel-img"></div>
             </div>
-
             <h1 class="couple-names">Elias & Lorena</h1>
-            <p style="font-style: italic; color: #666; max-width: 500px; margin: 0 auto;">"Nuestro hogar no es un lugar… es el propósito de Dios cumpliéndose en nosotros."</p>
+            <p class="quote">"Nuestro hogar no es un lugar… es el propósito de Dios cumpliéndose en nosotros."</p>
             <div class="divider"></div>
         </section>
 
@@ -43,12 +47,20 @@
                     <h3>CUÁNDO</h3>
                     <p>Domingo, 16 de Agosto 2026</p>
                     <p>14:00 Horas</p>
+                    <div class="calendar-add">
+                        <p style="font-size: 0.7rem; color: #888; margin-top: 10px;">AGENDAR EN:</p>
+                        <div class="calendar-links">
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bodas+de+Plata+Elias+y+Lorena&dates=20260816T140000Z/20260816T220000Z" target="_blank">Google</a>
+                            <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260816T140000Z%0ADTEND:20260816T220000Z%0ASUMMARY:Bodas de Plata Elias y Lorena%0ALOCATION:Santa Catarina Pinula%0AEND:VEVENT%0AEND:VCALENDAR">Apple</a>
+                            <a href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Bodas+de+Plata+Elias+y+Lorena&startdt=2026-08-16T14:00:00Z&enddt=2026-08-16T22:00:00Z" target="_blank">Outlook</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="detail-card">
                     <h3>DÓNDE</h3>
                     <p>Salón Municipal</p>
                     <p>Santa Catarina Pinula</p>
-                    <a href="https://maps.app.goo.gl/nMxpLybv47NsxUgy5" target="_blank" class="btn-maps">VER UBICACIÓN</a>
+                    <a href="https://maps.google.com" target="_blank" class="btn-maps">VER UBICACIÓN</a>
                 </div>
             </div>
         </section>
@@ -61,15 +73,6 @@
                 <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
                 <div class="time-box"><span id="seconds">00</span><small>Seg</small></div>
             </div>
-
-            <div class="calendar-add">
-                <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Agendar en mi calendario:</p>
-                <div class="calendar-links">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bodas+de+Plata+Elias+y+Lorena&dates=20260816T140000Z/20260816T220000Z" target="_blank">Google</a>
-                    <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0AURL:https%3A%2F%2Ftu-sitio.com%0ADTSTART:20260816T140000Z%0ADTEND:20260816T220000Z%0ASUMMARY:Bodas de Plata Elias y Lorena%0ADESCRIPTION:Celebración de nuestro 25 aniversario%0ALOCATION:Salón Municipal, Santa Catarina Pinula%0AEND:VEVENT%0AEND:VCALENDAR">Apple</a>
-                    <a href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Bodas+de+Plata+Elias+y+Lorena&startdt=2026-08-16T14:00:00Z&enddt=2026-08-16T22:00:00Z&body=Celebración de nuestro 25 aniversario&location=Salón Municipal, Santa Catarina Pinula" target="_blank">Outlook</a>
-                </div>
-            </div>
             <div class="divider"></div>
         </section>
 
@@ -78,31 +81,19 @@
             <div class="itinerary-list">
                 <div class="itinerary-item">
                     <span class="iti-icon"><i class="fa-solid fa-church"></i></span>
-                    <div class="iti-info">
-                        <h4>Ceremonia de Bendición</h4>
-                        <p>14:00 PM</p>
-                    </div>
+                    <div class="iti-info"><h4>Ceremonia de Bendición</h4><p>14:00 PM</p></div>
                 </div>
                 <div class="itinerary-item">
                     <span class="iti-icon"><i class="fa-solid fa-champagne-glasses"></i></span>
-                    <div class="iti-info">
-                        <h4>Recepción y Convivencia</h4>
-                        <p>16:30 PM</p>
-                    </div>
+                    <div class="iti-info"><h4>Recepción y Convivencia</h4><p>16:30 PM</p></div>
                 </div>
                 <div class="itinerary-item">
                     <span class="iti-icon"><i class="fa-solid fa-dove"></i></span>
-                    <div class="iti-info">
-                        <h4>Acción de Gracias</h4>
-                        <p>18:00 PM</p>
-                    </div>
+                    <div class="iti-info"><h4>Acción de Gracias</h4><p>18:00 PM</p></div>
                 </div>
                 <div class="itinerary-item">
                     <span class="iti-icon"><i class="fa-solid fa-utensils"></i></span>
-                    <div class="iti-info">
-                        <h4>Cena de Gala</h4>
-                        <p>19:00 PM</p>
-                    </div>
+                    <div class="iti-info"><h4>Cena de Gala</h4><p>19:00 PM</p></div>
                 </div>
             </div>
             <div class="divider"></div>
@@ -112,10 +103,7 @@
             <h3 class="section-subtitle">NUESTRA HISTORIA</h3>
             <div class="carousel">
                 <div class="carousel-track">
-                    <img src="img/newf.png">
-                    <img src="img/Lat.png">
-                    <img src="img/portada.png">
-                    <img src="img/newf.png">
+                    <img src="img/newf.png"><img src="img/Lat.png"><img src="img/portada.png"><img src="img/newf.png">
                 </div>
             </div>
             <div class="divider"></div>
@@ -127,12 +115,12 @@
                 <div class="detail-card">
                     <h4>HOMBRES</h4>
                     <p>Traje Formal / Etiqueta</p>
-                    <a href="https://www.pinterest.com/search/pins/?q=traje%20formal%20de%20hombres%20invitados%20a%20boda&rs=typed" target="_blank" class="btn-maps">PINTEREST</a>
+                    <a href="https://www.pinterest.com" target="_blank" class="btn-maps">PINTEREST</a>
                 </div>
                 <div class="detail-card">
                     <h4>MUJERES</h4>
                     <p>Vestido de Noche / Largo</p>
-                    <a href="https://www.pinterest.com/search/pins/?q=vestido%20para%20mujeres%20para%20boda&rs=typed" target="_blank" class="btn-maps">PINTEREST</a>
+                    <a href="https://www.pinterest.com" target="_blank" class="btn-maps">PINTEREST</a>
                 </div>
             </div>
             <div class="palette-container">
@@ -150,50 +138,51 @@
         <section class="container scroll-reveal">
             <h3 class="section-subtitle">MUESTRA DE CARIÑO</h3>
             <div class="gift-card">
-                <div class="gift-icon-box"><i class="fa-regular fa-envelope-open" style="color: var(--gold);"></i></div>
+                <div class="gift-icon-box"><i class="fa-regular fa-envelope-open"></i></div>
                 <h3>Lluvia de Sobres</h3>
-                <p class="gift-text">
-                    Su presencia es nuestro mayor regalo. Sin embargo, si desean obsequiarnos un detalle, contaremos con un cofre para recibir su muestra de cariño en efectivo en la recepción.
-                </p>
+                <p class="gift-text">Su presencia es nuestro mayor regalo. Sin embargo, si desean obsequiarnos un detalle, contaremos con un cofre en la recepción.</p>
             </div>
             <div class="divider"></div>
-        </section>
-
-        <section class="container scroll-reveal">
             <div class="rules-box">
                 <h3 style="text-align: center; letter-spacing: 2px; margin-bottom: 25px;">¡A TOMAR EN CUENTA!</h3>
                 <ul class="rules-list">
-                    <li><span>1</span> Llegar al menos 20 minutos antes del inicio.</li>
-                    <li><span>2</span> Seguir el código de vestimenta especificado.</li>
-                    <li><span>3</span> Confirmar su asistencia con anticipación.</li>
-                    <li><span>4</span> Evitar llevar acompañantes no incluidos.</li>
-                    <li><span>5</span> Seguir las instrucciones del personal.</li>
+                    <li><span>1</span> Llegar 20 minutos antes.</li>
+                    <li><span>2</span> Seguir el código de vestimenta.</li>
+                    <li><span>3</span> Confirmar asistencia con anticipación.</li>
                 </ul>
             </div>
         </section>
 
         <section class="container scroll-reveal">
             <div class="rsvp-box">
-                <h3 style="letter-spacing: 3px; margin-bottom: 20px;">CONFIRMAR ASISTENCIA</h3>
+                <h3 class="rsvp-title">CONFIRMAR ASISTENCIA</h3>
                 <form id="rsvpForm" class="rsvp-form">
                     <input type="text" name="name" placeholder="Tu nombre" required>
                     <div class="radio-group">
-                        <label><input type="radio" name="attending" value="si" required> Si asistiré</label>
-                        <label><input type="radio" name="attending" value="no"> No asistiré</label>
+                        <label><input type="radio" name="attendance" value="si" required> Si asistiré</label>
+                        <label><input type="radio" name="attendance" value="no"> No asistiré</label>
                     </div>
                     <textarea name="message" placeholder="Mensaje para nosotros..." rows="4"></textarea>
-                    <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%;">Enviar Respuesta</button>
+                    <button type="submit" class="btn-send">ENVIAR RESPUESTA</button>
                 </form>
             </div>
-            <p class="final-text">Nos gustaría que nos acompañes en este día tan especial</p>
         </section>
 
-        <footer class="footer">
-            <p>E & L — 2026 Boda de Plata</p>
-            <p>Copyright © 2026 | <b>OLAILZ</b></p>
+        <footer class="footer-premium">
+            <p class="footer-note">Nos gustaría que nos acompañes en este día tan especial</p>
+            <p class="footer-tagline">E & L — 2026 BODA DE PLATA</p>
+            <div class="footer-social-block">
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest"></i></a> 
+                </div>
+                <p class="footer-copyright">COPYRIGHT © 2026 | <b>OLAILZ</b></p>
+            </div>
         </footer>
     </main>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 :root {
     --gold: #c5a059;
+    --gold-dark: #a68545;
     --dark: #1a1a1a;
     --paper: #f7f5f0;
     --white: #ffffff;
@@ -16,14 +17,25 @@ body {
     line-height: 1.5;
 }
 
-/* --- PORTADA --- */
+/* --- BOTÓN DE MÚSICA FLOTANTE --- */
+.music-control {
+    position: fixed; bottom: 20px; right: 20px; z-index: 2000;
+    background: var(--white); border: 1px solid var(--gold); color: var(--gold);
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
+}
+.music-control.playing { background: var(--gold); color: white; }
+.music-control:hover { transform: scale(1.1); }
+
+/* --- PORTADA (HERO) --- */
 .hero {
-    height: 100vh; width: 100%; position: fixed; z-index: 1000;
+    height: 100vh; width: 100%; position: fixed; z-index: 3000;
     background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('../img/fondoPortada.png') no-repeat center center;
     background-size: cover; display: flex; align-items: center; justify-content: center; transition: var(--transition);
 }
 .hero.hide { transform: translateY(-100%); }
-.hidden { display: none; }
+.hidden { display: none !important; }
 .hero-content-wrapper { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .envelope-container { max-width: 320px; width: 85%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)); }
 .envelope-img { width: 100%; }
@@ -40,16 +52,16 @@ body {
 .btn-maps {
     display: inline-block; margin-top: 10px; padding: 8px 18px;
     border: 1px solid var(--gold); color: var(--gold); text-decoration: none;
-    font-size: 0.7rem; letter-spacing: 1px; transition: 0.3s;
+    font-size: 0.7rem; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;
 }
 .btn-maps:hover { background: var(--gold); color: white; }
 
-/* --- SECCIONES --- */
+/* --- SECCIONES Y TIPOGRAFÍA --- */
 .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; }
 .divider { width: 60px; height: 1.5px; background: var(--gold); margin: 1.5rem auto; }
-
 .couple-names { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: var(--gold); margin: 0.5rem 0; }
 .section-subtitle { letter-spacing: 4px; font-size: 0.85rem; color: #888; text-transform: uppercase; display: block; margin-bottom: 5px; }
+.quote { font-style: italic; color: #666; max-width: 500px; margin: 0 auto; }
 
 /* --- TRÍPTICO --- */
 .triple-panel-container { display: flex; justify-content: center; align-items: center; gap: 12px; height: 420px; margin: 2rem auto; }
@@ -64,32 +76,17 @@ body {
 .time-box span { display: block; font-size: 2rem; color: var(--gold); font-weight: 600; }
 .time-box small { font-size: 0.6rem; text-transform: uppercase; color: #999; }
 
-/* --- ITINERARIO CORREGIDO --- */
+/* --- ITINERARIO --- */
 .itinerary-list { display: flex; flex-direction: column; gap: 30px; align-items: center; margin: 2rem 0; }
-.itinerary-item { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    gap: 10px; 
-    width: 100%; 
-    text-align: center; 
-    transition: transform 0.3s ease;
-}
+.itinerary-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; text-align: center; }
 .iti-icon { 
-    font-size: 1.8rem; /* Tamaño optimizado para iconos */
-    color: var(--gold); 
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(197, 160, 89, 0.3); /* Círculo sutil */
-    border-radius: 50%;
-    background: white;
-    margin-bottom: 5px;
+    font-size: 1.8rem; color: var(--gold); width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(197, 160, 89, 0.3); border-radius: 50%;
+    background: white; margin-bottom: 5px;
 }
-.iti-info h4 { font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 2px; text-transform: uppercase; font-weight: 600; }
-.iti-info p { font-size: 0.8rem; color: #777; font-weight: 400; letter-spacing: 1px; }
+.iti-info h4 { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+.iti-info p { font-size: 0.8rem; color: #777; }
 
 /* --- CARRUSEL --- */
 .carousel { width: 100%; overflow: hidden; background: white; padding: 15px; border: 1px solid #eee; margin: 1.5rem 0; }
@@ -100,27 +97,40 @@ body {
     100% { transform: translateX(-1000px); }
 }
 
-/* --- REGLAS --- */
-.rules-box { background: white; padding: 2.5rem 1.5rem; border: 1px solid #eee; border-radius: 4px; }
+/* --- REGLAS Y REGALOS --- */
+.gift-card, .rules-box { background: white; padding: 2.5rem 1.5rem; border: 1px solid #eee; border-radius: 4px; margin-top: 1rem; }
+.gift-icon-box { font-size: 2.5rem; margin-bottom: 15px; color: var(--gold); }
+.gift-text { font-size: 0.85rem; color: #666; max-width: 450px; margin: 0 auto; line-height: 1.6; }
 .rules-list { list-style: none; max-width: 500px; margin: 0 auto; text-align: left; }
 .rules-list li { margin-bottom: 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 12px; color: #555; }
 .rules-list li span { background: var(--gold); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
 
-/* --- SECCIÓN REGALOS --- */
-.gift-card { background: white; padding: 2.5rem 1.5rem; border: 1px solid #eee; border-radius: 4px; margin-top: 1rem; }
-.gift-icon-box { font-size: 2.5rem; margin-bottom: 15px; color: var(--gold); }
-.gift-text { font-size: 0.85rem; color: #666; max-width: 450px; margin: 10px auto 0; line-height: 1.6; }
-
-/* --- RSVP Y GRID --- */
+/* --- GRID (CUÁNDO / DÓNDE / VESTIMENTA) --- */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 1.5rem 0; }
 .detail-card { background: white; padding: 2rem 1.5rem; border: 1px solid #eee; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-.detail-card h3 { font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 10px; color: var(--gold); }
+.detail-card h3, .detail-card h4 { font-size: 0.85rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
 
-.rsvp-box { background: white; padding: 2.5rem; border: 1px solid #eee; margin-top: 1.5rem; border-radius: 4px; }
-.rsvp-form input, .rsvp-form textarea { width: 100%; padding: 0.9rem; margin-bottom: 1rem; border: 1px solid #eee; font-family: inherit; font-size: 0.9rem; background: #fafafa; border-radius: 4px; }
-.radio-group { margin: 1rem 0; display: flex; justify-content: center; gap: 30px; font-size: 0.9rem; }
+/* --- FORMULARIO RSVP (ESTILO TUYO ORIGINAL CORREGIDO) --- */
+.rsvp-box { background: white; padding: 2.5rem; border: 1px solid #eee; border-radius: 4px; margin-top: 1.5rem; }
+.rsvp-title { letter-spacing: 2px; color: var(--dark); margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
+.rsvp-form input[type="text"], .rsvp-form textarea { 
+    width: 100%; padding: 0.9rem; margin-bottom: 1rem; border: 1px solid #eee; 
+    font-family: inherit; font-size: 0.9rem; background: #fafafa; border-radius: 4px; 
+}
+.radio-group { margin: 1.5rem 0; display: flex; justify-content: center; gap: 30px; font-size: 0.9rem; }
+.radio-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.radio-group input[type="radio"] { accent-color: var(--gold); width: 17px; height: 17px; }
 
-/* --- PALETA Y CALENDARIO --- */
+.btn-send {
+    width: 100%; background: var(--dark); color: white; padding: 1rem;
+    border: 1px solid var(--gold); border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s;
+    font-weight: 600;
+}
+.btn-send:hover:not(:disabled) { background: var(--gold); color: white; }
+
+/* --- PALETA Y CALENDARIO (TUS ESTILOS ORIGINALES) --- */
+.palette-container { margin-top: 20px; }
 .palette { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
 .color-circle { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
@@ -132,9 +142,15 @@ body {
 }
 .calendar-links a:hover { border-color: var(--gold); background: var(--gold); color: white; transform: translateY(-3px); }
 
-/* --- FOOTER --- */
-.final-text { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--gold); margin-top: 2rem; }
-.footer { padding: 3rem 0; color: #aaa; font-size: 0.7rem; letter-spacing: 2px; text-align: center; width: 100%; text-transform: uppercase; }
+/* --- FOOTER PREMIUM --- */
+.footer-premium { text-align: center; width: 100%; margin-top: 4rem; }
+.footer-note { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 2.5rem; margin-bottom: 1rem; padding: 0 1.5rem; }
+.footer-social-block { background-color: var(--gold-dark); padding: 2.5rem 1.5rem; color: white; width: 100vw; margin-left: calc(-50vw + 50%); }
+.footer-socials { display: flex; justify-content: center; gap: 25px; font-size: 1.6rem; margin-bottom: 20px; }
+.footer-socials a { color: white; transition: 0.3s; }
+.footer-socials a:hover { transform: translateY(-3px); opacity: 0.8; }
+.footer-tagline { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 1rem; margin-bottom: 1rem; opacity: 0.8; }
+.footer-copyright { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; }
 
 /* --- ANIMACIONES --- */
 .scroll-reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.215, 0.61, 0.355, 1); }
@@ -146,5 +162,5 @@ body {
     .triple-panel-container { height: 320px; }
     .couple-names { font-size: 3rem; }
     .container { padding: 2.5rem 1.2rem; }
-    .iti-icon { width: 50px; height: 50px; font-size: 1.5rem; }
+    .footer-note { font-size: 1.9rem; }
 }
