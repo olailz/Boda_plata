@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. ANIMACIÓN DE REVELACIÓN (SCROLL)
+    // 6. ANIMACIÓN DE REVELACIÓN hjhjhj (SCROLL)
     function revealOnScroll() {
         const elements = document.querySelectorAll('.scroll-reveal');
         elements.forEach((el) => {
