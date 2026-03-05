@@ -4,22 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.getElementById('hero');
     const mainContent = document.getElementById('main-content');
 
-    // 1. APERTURA DE INVITACIÓN (Sincronizado con CSS hero.hide)
+    // 1. APERTURA DE INVITACIÓN
     if (btnOpen) {
         btnOpen.addEventListener('click', () => {
-            // En lugar de display: none, usamos la clase que definiste en tu CSS
             hero.classList.add('hide'); 
             mainContent.classList.remove('hidden');
             
-            // Esperamos a que la transición termine para hacer scroll
+            // Un pequeño delay para que la transición del sobre termine antes de mostrar lo demás
             setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                revealOnScroll();
-            }, 600);
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                revealOnScroll(); // Disparamos la entrada de la primera sección
+            }, 800);
         });
     }
 
-    // 2. CONTADOR DE TIEMPO
+    // 2. CONTADOR DE TIEMPO (Tu lógica original intacta)
     const targetDate = new Date("Aug 16, 2026 14:00:00").getTime();
     const updateCountdown = () => {
         const now = new Date().getTime();
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        // Actualizamos solo si existen los elementos
         if(document.getElementById("days")) {
             document.getElementById("days").innerText = d.toString().padStart(2, '0');
             document.getElementById("hours").innerText = h.toString().padStart(2, '0');
@@ -47,9 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 3. ENVÍO DE DATOS A GOOGLE SHEETS
+    // 3. ENVÍO DE DATOS A GOOGLE SHEETS (Tu lógica original intacta)
     const rsvpForm = document.getElementById('rsvpForm');
-    // Asegúrate de que esta URL sea la de tu implementación más reciente
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzZXJCbuEg8lJnkTf4dtS_Tfn9Z2lFjbXdV-dz_JHmF9P2Kwfc-W9rYlebkkHPp0pxw/exec'; 
 
     if (rsvpForm) {
@@ -79,15 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. ANIMACIÓN AL HACER SCROLL
+    // 4. ANIMACIÓN MEJORADA AL HACER SCROLL
     function revealOnScroll() {
         const elements = document.querySelectorAll('.scroll-reveal');
-        elements.forEach(el => {
-            const pos = el.getBoundingClientRect().top;
-            if (pos < window.innerHeight - 50) {
+        
+        elements.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Se activa cuando el elemento entra un 15% en la pantalla
+            if (rect.top <= windowHeight * 0.85) {
                 el.classList.add('active');
             }
         });
     }
+
     window.addEventListener('scroll', revealOnScroll);
 });
