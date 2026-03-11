@@ -6,11 +6,11 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
         height: '0',
         width: '0',
-        videoId: '1j67RTRKNe4', 
+        videoId: '6p8L4nLBCdI', 
         playerVars: {
             'autoplay': 0,
             'loop': 1,
-            'playlist': '1j67RTRKNe4' 
+            'playlist': '6p8L4nLBCdI' 
         },
         events: {
             'onReady': () => { console.log("Música lista para sonar."); }
